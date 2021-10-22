@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  auth: {
+    domain: 'dev--ihngka6.eu.auth0.com',
+    clientId: 'YExphUsxSZurW3NGyT1X5qvj5YRcFymi',
+    audience: 'https://sales-api-dev.com',
+    httpInterceptor: {
+      allowedList: ['http://localhost:3000/*'],
+    },
+    redirectUri: 'http://localhost:4200/login-callback',
+  },
 };
 
 /*
