@@ -5,9 +5,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginCallbackComponent } from './login-callback.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginCallbackComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,6 +20,7 @@ import { AppComponent } from './app.component';
       httpInterceptor: {
         allowedList: ['http://localhost:3000/*'],
       },
+      redirectUri: 'http://localhost:4200/login-callback',
     }),
   ],
   providers: [

@@ -313,9 +313,6 @@
   <ng-template #loggedOut>
     <button (click)="auth.loginWithRedirect()">Log in</button>
   </ng-template>
-  <ul *ngIf="auth.user$ | async as user">
-    <li>{{ user | json }}</li>
-  </ul>
 
   <div
     aria-label="Angular on YouTube"
@@ -391,6 +388,10 @@
   <div *ngIf="auth.isAuthenticated$ | async">
     <button (click)="test()">test</button>
   </div>
+  <pre *ngIf="auth.user$ | async as user">
+    {{ user | json }}
+  </pre>
+
   <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
   <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
   <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->

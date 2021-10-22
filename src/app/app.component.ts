@@ -2,7 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +18,8 @@ export class AppComponent {
     public auth: AuthService,
     public http: HttpClient
   ) {}
+
+  ngOnInit() {}
 
   test() {
     return this.http
