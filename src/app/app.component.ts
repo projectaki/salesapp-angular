@@ -20,10 +20,4 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {}
-
-  test() {
-    return this.http
-      .get('http://localhost:3000/test')
-      .subscribe((x) => console.log(x));
-  }
 }

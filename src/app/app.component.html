@@ -385,12 +385,12 @@
       />
     </svg>
   </div>
+
   <div *ngIf="auth.isAuthenticated$ | async">
-    <button (click)="test()">test</button>
+    <pre *ngIf="auth.user$ | async as user">
+      {{ user | json }}
+    </pre>
   </div>
-  <pre *ngIf="auth.user$ | async as user">
-    {{ user | json }}
-  </pre>
 
   <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
   <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
