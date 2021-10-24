@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginCallbackComponent } from './login-callback.component';
 import { environment } from 'src/environments/environment';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [AppComponent, LoginCallbackComponent],
@@ -15,9 +16,10 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     HttpClientModule,
     AuthModule.forRoot(environment.auth),
+    GraphQLModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+    //{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, // Needed for REST, attaching token to requests
   ],
   bootstrap: [AppComponent],
 })
