@@ -32,7 +32,6 @@ export function createApollo(
       ? await authService.getAccessTokenSilently().toPromise()
       : null;
 
-    console.log('token', token);
     if (token === null) {
       return {};
     } else {

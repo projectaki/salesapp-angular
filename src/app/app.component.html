@@ -390,6 +390,9 @@
     <pre *ngIf="auth.user$ | async as user">
       {{ user | json }}
     </pre>
+    <pre *ngIf="user | async as user">
+      {{ user | json }}
+    </pre>
   </div>
 
   <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
