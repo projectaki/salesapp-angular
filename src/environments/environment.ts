@@ -11,9 +11,10 @@ export const environment = {
     // httpInterceptor: { // for REST, when using the inerceptor
     //   allowedList: ['http://localhost:3000/*'],
     // },
-    redirectUri: 'http://localhost:4200/login-callback',
+    redirectUri: 'http://localhost:4200/login-callback', // Redirect here to handle successful login
   },
   graphqlServer: 'http://localhost:3000/graphql',
+  appUrl: 'http://localhost:4200',
 };
 
 /*

@@ -27,7 +27,7 @@ export function createApollo(
     const isAuthenticated = await authService.isAuthenticated$
       .pipe(take(1))
       .toPromise();
-
+    // If user is authenticated then attach token to header
     const token = isAuthenticated
       ? await authService.getAccessTokenSilently().toPromise()
       : null;
@@ -57,7 +57,7 @@ export function createApollo(
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
-      deps: [HttpLink, AuthService],
+      deps: [HttpLink, AuthService], // Inject auth service
     },
   ],
 })
