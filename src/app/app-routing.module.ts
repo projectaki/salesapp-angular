@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginCallbackComponent } from './callback-components/login-callback.component';
+import { LoginCallbackComponent } from './modules/callback-components/login-callback.component';
 import { HomeComponent } from './modules/home/home.component';
 
 const routes: Routes = [

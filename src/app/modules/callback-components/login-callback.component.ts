@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { combineLatest } from 'rxjs';
 import { concatMap, mergeMap, switchMap, take, tap } from 'rxjs/operators';
-import { UserService } from '../modules/user/user.service';
+import { UserService } from '../user/user.service';
 
 @Component({
   template: '<div></div>',
@@ -22,8 +22,7 @@ export class LoginCallbackComponent implements OnInit {
   syncUser = async () => {
     const authenticatedUser = await this.auth.user$.pipe(take(1)).toPromise();
     const user = await this.userService.getUser().pipe(take(1)).toPromise();
-    console.log(authenticatedUser);
-    console.log(user);
+
     if (!user)
       return this.userService
         .createUser({
