@@ -6,7 +6,6 @@ import {
   UserCreateInput,
   UserUpdateInput,
 } from 'src/types/graphql-global-types';
-import { createUser_createUser } from './types/createUser';
 
 const GET_CURRENT_USER = gql`
   query getUser {

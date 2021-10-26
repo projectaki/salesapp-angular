@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'login-logout-button',
+  templateUrl: 'login-logout-button.component.html',
 })
-export class HomeComponent implements OnInit {
+export class LoginLogoutButtonComponent implements OnInit {
   config: any;
 
   constructor(public auth: AuthService) {
@@ -15,6 +14,4 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
-  async test() {}
 }

@@ -1,8 +1,5 @@
-<ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-  <button (click)="auth.logout({ returnTo: config.appUrl })">Log out</button>
-  <button (click)="test()">Test</button>
-</ng-container>
-
-<ng-template #loggedOut>
-  <button (click)="auth.loginWithRedirect()">Log in</button>
-</ng-template>
+<mat-grid-list cols="1" rowHeight="2:1">
+  <mat-grid-tile
+    ><mat-card>Welcome to the application!</mat-card></mat-grid-tile
+  >
+</mat-grid-list>

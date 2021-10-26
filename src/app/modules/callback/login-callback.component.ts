@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { combineLatest } from 'rxjs';
 import { concatMap, mergeMap, switchMap, take, tap } from 'rxjs/operators';
-import { UserService } from '../user/user.service';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   template: '<div></div>',
