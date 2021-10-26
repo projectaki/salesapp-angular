@@ -8,10 +8,10 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { GraphQLModule } from './graphql/graphql.module';
 import { HomeModule } from './modules/home/home.module';
-import { LoginCallbackComponent } from './modules/callback-components/login-callback.component';
+import { CallbackModule } from './modules/callback-components/callback.module';
 
 @NgModule({
-  declarations: [AppComponent, LoginCallbackComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,6 +19,7 @@ import { LoginCallbackComponent } from './modules/callback-components/login-call
     AuthModule.forRoot(environment.auth),
     GraphQLModule,
     HomeModule,
+    CallbackModule,
   ],
   providers: [
     //{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, // Needed for REST, attaching token to requests
