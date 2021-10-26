@@ -5,19 +5,24 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginCallbackComponent } from './login-callback.component';
 import { environment } from 'src/environments/environment';
+import { GraphQLModule } from './graphql/graphql.module';
+import { HomeModule } from './modules/home/home.module';
+import { CallbackModule } from './modules/callback-components/callback.module';
 
 @NgModule({
-  declarations: [AppComponent, LoginCallbackComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     AuthModule.forRoot(environment.auth),
+    GraphQLModule,
+    HomeModule,
+    CallbackModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+    //{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, // Needed for REST, attaching token to requests
   ],
   bootstrap: [AppComponent],
 })
