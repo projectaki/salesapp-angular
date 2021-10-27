@@ -7,7 +7,7 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item routerLink="./profile">
       <mat-icon>person</mat-icon>
       <span>Profile</span>
     </button>
@@ -24,7 +24,7 @@
 </ng-container>
 
 <ng-template #loggedOut>
-  <button mat-raised-button color="accent" (click)="auth.loginWithRedirect()">
+  <button mat-raised-button color="primary" (click)="auth.loginWithRedirect()">
     Login
   </button>
 </ng-template>
