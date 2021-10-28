@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -26,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     FlexLayoutModule,
     MatInputModule,
+    MatSlideToggleModule,
   ],
   exports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     FlexLayoutModule,
     MatInputModule,
+    MatSlideToggleModule,
   ],
 })
 export class SharedModule {}

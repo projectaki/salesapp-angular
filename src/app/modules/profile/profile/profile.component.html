@@ -36,17 +36,6 @@
       <mat-card-header>
         <mat-card-title>Preferences</mat-card-title>
       </mat-card-header>
-      <form [formGroup]="colorGroup" (ngSubmit)="setTheme()">
-        <mat-card-content>
-          <mat-label>Primary theme</mat-label>
-          <input type="color" matInput formControlName="primaryColor" />
-          <mat-label>Secondary theme</mat-label>
-          <input type="color" matInput formControlName="accentColor" />
-        </mat-card-content>
-        <mat-card-actions align="end">
-          <button mat-raised-button color="accent">Update</button>
-        </mat-card-actions>
-      </form>
     </mat-card>
   </div>
 </div>

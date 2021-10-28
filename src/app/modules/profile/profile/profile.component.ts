@@ -9,28 +9,11 @@ import { ThemeChangerService } from 'src/app/core/theme-changer/theme-changer.se
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  colorGroup: FormGroup;
   constructor(
     public auth: AuthService,
     public themeChanger: ThemeChangerService,
     private fb: FormBuilder
-  ) {
-    this.colorGroup = this.fb.group({
-      primaryColor: ['#c2185c'],
-      accentColor: ['#505050'],
-    });
-  }
+  ) {}
 
-  ngOnInit(): void {
-    this.setTheme();
-  }
-
-  setTheme() {
-    this.themeChanger.saveAccentColor(
-      this.colorGroup.get('primaryColor')?.value
-    );
-    this.themeChanger.savePrimaryColor(
-      this.colorGroup.get('accentColor')?.value
-    );
-  }
+  ngOnInit(): void {}
 }
