@@ -15,7 +15,7 @@
       mat-menu-item
       mat-basic-button
       color="accent"
-      (click)="auth.logout({ returnTo: config.appUrl })"
+      (click)="auth.logout()"
     >
       <mat-icon>exit_to_app</mat-icon>
       <span>Logout</span>
@@ -24,7 +24,11 @@
 </ng-container>
 
 <ng-template #loggedOut>
-  <button mat-raised-button color="primary" (click)="auth.loginWithRedirect()">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="auth.authApi.loginWithRedirect()"
+  >
     Login
   </button>
 </ng-template>

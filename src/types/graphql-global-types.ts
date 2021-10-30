@@ -13,6 +13,11 @@ export interface UserCreateInput {
   email: string;
 }
 
+export interface UserMetaDataInput {
+  key: string;
+  value: string;
+}
+
 export interface UserUpdateInput {
   name?: string | null;
   authId: string;

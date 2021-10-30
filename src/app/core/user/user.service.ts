@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   UserCreateInput,
+  UserMetaDataInput,
   UserUpdateInput,
 } from 'src/types/graphql-global-types';
 
@@ -32,6 +33,14 @@ const UPDATE_USER = gql`
       authId
       name
       email
+    }
+  }
+`;
+
+const UPDATE_USER_METADATA = gql`
+  mutation updateUserMetadata($input: UserMetaDataInput!) {
+    updateUserMetadata(input: $input) {
+      authId
     }
   }
 `;
@@ -70,6 +79,13 @@ export class UserService {
   updateUser(input: UserUpdateInput) {
     return this.apollo.mutate({
       mutation: UPDATE_USER,
+      variables: { input },
+    });
+  }
+
+  updateUserMetadata(input: UserMetaDataInput) {
+    return this.apollo.mutate({
+      mutation: UPDATE_USER_METADATA,
       variables: { input },
     });
   }

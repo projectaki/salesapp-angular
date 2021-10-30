@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '@auth0/auth0-angular';
-import { combineLatest } from 'rxjs';
-import { concatMap, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
+import { AuthenticationService } from 'src/app/core/auth/authentication.service';
 import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
@@ -12,15 +11,24 @@ export class LoginCallbackComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private auth: AuthService
+    private auth: AuthenticationService
   ) {}
 
   ngOnInit(): void {
-    this.syncUser().then(() => this.router.navigate(['']));
+    this.handleLogin();
   }
 
+  handleLogin = async () => {
+    this.auth.setAuthStatus();
+    await this.syncUser();
+    this.router.navigate(['']);
+  };
+
+  // Save user in db after login
   syncUser = async () => {
-    const authenticatedUser = await this.auth.user$.pipe(take(1)).toPromise();
+    const authenticatedUser = await this.auth.authApi.user$
+      .pipe(take(1))
+      .toPromise();
     const user = await this.userService.getUser().pipe(take(1)).toPromise();
 
     if (!user)

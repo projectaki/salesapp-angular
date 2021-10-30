@@ -57,13 +57,14 @@ type Product {
 
 type Query {
   user(id: String!): User!
-  getCurrentUser: User!
+  getCurrentUser: User
   product(id: String!): Product!
 }
 
 type Mutation {
   createUser(input: UserCreateInput!): User!
   updateUser(input: UserUpdateInput!): User!
+  updateUserMetadata(input: UserMetaDataInput!): User!
   createProduct(input: ProductCreateInput!): Product!
   updateProduct(input: ProductUpdateInput!): Product!
 }
@@ -78,6 +79,11 @@ input UserUpdateInput {
   name: String
   authId: String!
   email: String
+}
+
+input UserMetaDataInput {
+  key: String!
+  value: String!
 }
 
 input ProductCreateInput {
