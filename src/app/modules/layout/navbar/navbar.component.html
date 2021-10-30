@@ -1,13 +1,13 @@
-<mat-toolbar color="accent">
+<mat-toolbar color="primary">
   <span style="cursor: pointer" routerLink="./">Logo</span>
   <span class="example-spacer"></span>
   <ng-container *ngIf="auth.isAuthenticated$ | async">
-    <mat-icon>brightness_5</mat-icon>
+    <mat-icon style="color: orange">wb_sunny</mat-icon>
     <mat-slide-toggle
-      color="primary"
+      color="accent"
       [formControl]="darkMode"
     ></mat-slide-toggle>
-    <mat-icon>bedtime</mat-icon>
+    <mat-icon style="color: yellow">bedtime</mat-icon>
   </ng-container>
   <login-logout-button></login-logout-button>
 </mat-toolbar>
