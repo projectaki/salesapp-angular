@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/core/auth/authentication.service';
+import { ThemeService } from 'src/app/core/theme/theme.service';
 import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class LoginCallbackComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class LoginCallbackComponent implements OnInit {
         authenticatedUser['https://wezl.io/user_metadata']['darkMode'] ??
         'false';
       localStorage.setItem('darkMode', isDark);
+      this.themeService.toggleTheme(JSON.parse(isDark));
     }
   };
 

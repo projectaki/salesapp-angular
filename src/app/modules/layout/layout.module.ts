@@ -4,14 +4,14 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutComponent } from './layout.component';
 import { FooterComponent } from './footer/footer.component';
-import { LoginLogoutButtonComponent } from './login-logout-button/login-logout-button.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     LayoutComponent,
     FooterComponent,
-    LoginLogoutButtonComponent,
+    MenuComponent,
   ],
   imports: [CommonModule, SharedModule],
   exports: [],

@@ -12,7 +12,7 @@ body {
 @include mat-core();
 
 $angular-primary: mat-palette($mat-grey, 800);
-$angular-accent: mat-palette($mat-pink, A200, A100, A400);
+$angular-accent: mat-palette($mat-pink);
 
 $angular-warn: mat-palette($mat-red);
 

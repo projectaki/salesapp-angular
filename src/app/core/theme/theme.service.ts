@@ -9,7 +9,8 @@ import { UserService } from '../user/user.service';
   providedIn: 'root',
 })
 export class ThemeService {
-  themeChange: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private readonly themeChange: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
   themeChange$: Observable<boolean> = this.themeChange.asObservable().pipe(
     skip(1),
     tap((x) => {
@@ -34,7 +35,7 @@ export class ThemeService {
     this.setInitialTheme();
   }
 
-  setInitialTheme = () => {
+  private setInitialTheme = () => {
     const isDarkMode = localStorage.getItem('darkMode');
     if (isDarkMode) {
       this.themeChange.next(JSON.parse(isDarkMode));

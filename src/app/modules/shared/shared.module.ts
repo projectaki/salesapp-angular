@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [],
@@ -28,6 +29,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FlexLayoutModule,
     MatInputModule,
     MatSlideToggleModule,
+    LayoutModule,
   ],
   exports: [
     BrowserModule,
@@ -43,6 +45,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FlexLayoutModule,
     MatInputModule,
     MatSlideToggleModule,
+    LayoutModule,
   ],
 })
 export class SharedModule {}
