@@ -15,7 +15,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    this._removeAuthStatus();
+    localStorage.clear();
     this.authApi.logout({ returnTo: environment.appUrl });
   }
 
@@ -23,14 +23,13 @@ export class AuthenticationService {
     localStorage.setItem('loggedIn', 'true');
   }
 
-  private _removeAuthStatus() {
-    localStorage.removeItem('loggedIn');
-  }
-
   private _getAuthStatus() {
     return localStorage.getItem('loggedIn');
   }
 
+  /**
+   * wrapper around isAuthenticated$ to load faster based on localstorage
+   */
   checkAuthStatus() {
     const persistedAuthBool = this._getAuthStatus();
     if (persistedAuthBool) {

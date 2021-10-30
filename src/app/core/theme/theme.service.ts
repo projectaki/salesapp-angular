@@ -16,6 +16,7 @@ export class ThemeService {
       this.userService
         .updateUserMetadata({ key: 'darkMode', value: `${x}` })
         .subscribe();
+      localStorage.setItem('darkMode', JSON.stringify(x));
       (x &&
         document.body.classList.add('darkMode') &&
         this.overlay.getContainerElement().classList.add('darkMode')) ||
@@ -34,6 +35,10 @@ export class ThemeService {
   }
 
   setInitialTheme = () => {
+    const isDarkMode = localStorage.getItem('darkMode');
+    if (isDarkMode) {
+      this.themeChange.next(JSON.parse(isDarkMode));
+    }
     this.auth.authApi.user$
       .pipe(
         take(1),

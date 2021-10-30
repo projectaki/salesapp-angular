@@ -20,22 +20,26 @@ export class NavbarComponent implements OnInit {
     private themeService: ThemeService
   ) {
     this.darkMode = this.fb.control('');
+    this._initDarkModeListener(); // has to be in constructor other wont load after navigate
   }
 
-  ngOnInit(): void {
-    this._initDarkModeListener();
-  }
+  ngOnInit(): void {}
 
   private _initDarkModeListener() {
+    const sliderVal = localStorage.getItem('darkMode');
+    if (sliderVal) {
+      this.darkMode.setValue(JSON.parse(sliderVal));
+    }
+    // set initial value for slider
     this.themeService.themeChange$
       .pipe(
         take(1),
         tap((x) => {
-          console.log(x);
           this.darkMode.setValue(x);
         })
       )
       .subscribe();
+    // when slider changes, set the theme to change in service
     this.darkMode.valueChanges
       .pipe(tap((x) => this.themeService.toggleTheme(x)))
       .subscribe();

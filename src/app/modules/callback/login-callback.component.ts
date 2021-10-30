@@ -19,16 +19,26 @@ export class LoginCallbackComponent implements OnInit {
   }
 
   handleLogin = async () => {
-    this.auth.setAuthStatus();
-    await this.syncUser();
+    await this._setInitialUserData();
     this.router.navigate(['']);
   };
 
   // Save user in db after login
-  syncUser = async () => {
+  private _setInitialUserData = async () => {
     const authenticatedUser = await this.auth.authApi.user$
       .pipe(take(1))
       .toPromise();
+    this.auth.setAuthStatus();
+    if (authenticatedUser) {
+      await this._syncUser(authenticatedUser);
+      const isDark: string =
+        authenticatedUser['https://wezl.io/user_metadata']['darkMode'] ??
+        'false';
+      localStorage.setItem('darkMode', isDark);
+    }
+  };
+
+  private async _syncUser(authenticatedUser: any) {
     const user = await this.userService.getUser().pipe(take(1)).toPromise();
 
     if (!user)
@@ -47,5 +57,5 @@ export class LoginCallbackComponent implements OnInit {
           authId: authenticatedUser?.sub ?? '',
         })
         .subscribe();
-  };
+  }
 }
