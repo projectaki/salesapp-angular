@@ -1,0 +1,38 @@
+<div
+  class="container"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="start"
+  fxLayoutGap="2em"
+  *ngIf="auth.authApi.user$ | async as user"
+>
+  <div fxLayout="column" fxLayoutGap="2em">
+    <mat-card class="example-card" color="primary">
+      <mat-card-header>
+        <div class="example-header-image"></div>
+        <img mat-card-avatar src="{{ user.picture }}" alt="" />
+        <mat-card-title>Profile</mat-card-title>
+        <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content *ngIf="auth.isAuthenticated$ | async">
+        <div fxLayout="row">
+          <mat-icon style="color: orange">wb_sunny</mat-icon>
+          <mat-slide-toggle
+            color="accent"
+            [formControl]="darkMode"
+          ></mat-slide-toggle>
+          <mat-icon style="color: yellow">bedtime</mat-icon>
+        </div>
+      </mat-card-content>
+      <!-- <mat-card-actions align="end">
+        <button mat-raised-button color="accent">Update</button>
+      </mat-card-actions> -->
+    </mat-card>
+    <!-- <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Preferences</mat-card-title>
+      </mat-card-header>
+    </mat-card> -->
+  </div>
+</div>

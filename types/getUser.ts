@@ -14,5 +14,5 @@ export interface getUser_getCurrentUser {
 }
 
 export interface getUser {
-  getCurrentUser: getUser_getCurrentUser;
+  getCurrentUser: getUser_getCurrentUser | null;
 }

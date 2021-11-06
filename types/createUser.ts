@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { UserCreateInput } from "./../../../../types/graphql-global-types";
+import { UserCreateInput } from "./../src/types/graphql-global-types";
 
 // ====================================================
 // GraphQL mutation operation: createUser
@@ -11,9 +11,7 @@ import { UserCreateInput } from "./../../../../types/graphql-global-types";
 
 export interface createUser_createUser {
   __typename: "User";
-  authId: string;
-  name: string;
-  email: string;
+  _id: string;
 }
 
 export interface createUser {
