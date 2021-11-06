@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { UserUpdateInput } from "./../../../../types/graphql-global-types";
+import { UserUpdateInput } from "./../src/types/graphql-global-types";
 
 // ====================================================
 // GraphQL mutation operation: updateUser
@@ -11,9 +11,7 @@ import { UserUpdateInput } from "./../../../../types/graphql-global-types";
 
 export interface updateUser_updateUser {
   __typename: "User";
-  authId: string;
-  name: string;
-  email: string;
+  _id: string;
 }
 
 export interface updateUser {

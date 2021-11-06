@@ -20,9 +20,7 @@ const GET_CURRENT_USER = gql`
 const CREATE_USER = gql`
   mutation createUser($input: UserCreateInput!) {
     createUser(input: $input) {
-      authId
-      name
-      email
+      _id
     }
   }
 `;
@@ -30,9 +28,7 @@ const CREATE_USER = gql`
 const UPDATE_USER = gql`
   mutation updateUser($input: UserUpdateInput!) {
     updateUser(input: $input) {
-      authId
-      name
-      email
+      _id
     }
   }
 `;
@@ -40,7 +36,7 @@ const UPDATE_USER = gql`
 const UPDATE_USER_METADATA = gql`
   mutation updateUserMetadata($input: UserMetaDataInput!) {
     updateUserMetadata(input: $input) {
-      authId
+      _id
     }
   }
 `;

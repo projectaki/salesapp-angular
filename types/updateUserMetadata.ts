@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { UserMetaDataInput } from "./../../../../types/graphql-global-types";
+import { UserMetaDataInput } from "./../src/types/graphql-global-types";
 
 // ====================================================
 // GraphQL mutation operation: updateUserMetadata
@@ -11,7 +11,7 @@ import { UserMetaDataInput } from "./../../../../types/graphql-global-types";
 
 export interface updateUserMetadata_updateUserMetadata {
   __typename: "User";
-  authId: string;
+  _id: string;
 }
 
 export interface updateUserMetadata {

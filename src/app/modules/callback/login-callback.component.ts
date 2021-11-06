@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '@auth0/auth0-spa-js';
 import { take } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/core/auth/authentication.service';
 import { ThemeService } from 'src/app/core/theme/theme.service';
@@ -41,15 +42,14 @@ export class LoginCallbackComponent implements OnInit {
     }
   };
 
-  private async _syncUser(authenticatedUser: any) {
+  private async _syncUser(authenticatedUser: User) {
     const user = await this.userService.getUser().pipe(take(1)).toPromise();
-
-    if (!user)
+    if (!user.data.getCurrentUser)
       return this.userService
         .createUser({
           name: authenticatedUser?.name ?? '',
           email: authenticatedUser?.email ?? '',
-          authId: authenticatedUser?.sub ?? '',
+          _id: authenticatedUser?.sub ?? '',
         })
         .subscribe();
     else
@@ -57,7 +57,7 @@ export class LoginCallbackComponent implements OnInit {
         .updateUser({
           name: authenticatedUser?.name ?? '',
           email: authenticatedUser?.email ?? '',
-          authId: authenticatedUser?.sub ?? '',
+          _id: authenticatedUser?.sub ?? '',
         })
         .subscribe();
   }

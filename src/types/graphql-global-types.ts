@@ -8,8 +8,8 @@
 //==============================================================
 
 export interface UserCreateInput {
+  _id: string;
   name: string;
-  authId: string;
   email: string;
 }
 
@@ -19,8 +19,8 @@ export interface UserMetaDataInput {
 }
 
 export interface UserUpdateInput {
+  _id: string;
   name?: string | null;
-  authId: string;
   email?: string | null;
 }
 

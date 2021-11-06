@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "apollo-download": "apollo client:download-schema --endpoint=http://localhost:3000/graphql schema.graphql",
-    "apollo-codegen": "apollo codegen:generate --localSchemaFile=schema.graphql --target=typescript --includes=src/**/*.ts --tagName=gql --addTypename --globalTypesFile=src/types/graphql-global-types.ts types"
+    "apollo-codegen": "apollo codegen:generate --localSchemaFile=schema.graphql --target=typescript --includes=src/**/*.ts --tagName=gql --outputFlat --addTypename --globalTypesFile=src/types/graphql-global-types.ts types"
   },
   "private": true,
   "dependencies": {
