@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   UserCreateInput,
+  UserMetaDataInput,
   UserUpdateInput,
 } from 'src/types/graphql-global-types';
-import { createUser_createUser } from './types/createUser';
 
 const GET_CURRENT_USER = gql`
   query getUser {
@@ -20,9 +20,7 @@ const GET_CURRENT_USER = gql`
 const CREATE_USER = gql`
   mutation createUser($input: UserCreateInput!) {
     createUser(input: $input) {
-      authId
-      name
-      email
+      _id
     }
   }
 `;
@@ -30,9 +28,15 @@ const CREATE_USER = gql`
 const UPDATE_USER = gql`
   mutation updateUser($input: UserUpdateInput!) {
     updateUser(input: $input) {
-      authId
-      name
-      email
+      _id
+    }
+  }
+`;
+
+const UPDATE_USER_METADATA = gql`
+  mutation updateUserMetadata($input: UserMetaDataInput!) {
+    updateUserMetadata(input: $input) {
+      _id
     }
   }
 `;
@@ -71,6 +75,13 @@ export class UserService {
   updateUser(input: UserUpdateInput) {
     return this.apollo.mutate({
       mutation: UPDATE_USER,
+      variables: { input },
+    });
+  }
+
+  updateUserMetadata(input: UserMetaDataInput) {
+    return this.apollo.mutate({
+      mutation: UPDATE_USER_METADATA,
       variables: { input },
     });
   }

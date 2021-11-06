@@ -33,9 +33,8 @@ directive @connection(
 ) on FIELD
 
 type User {
-  id: String!
+  _id: String!
   name: String!
-  authId: String!
   email: String!
   created_at: DateTime!
   updated_at: DateTime!
@@ -47,37 +46,44 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Product {
-  id: String!
+  _id: String!
   name: String!
   price: Int!
   previous_price: Int!
   created_at: DateTime!
   updated_at: DateTime!
+  img_url: String
 }
 
 type Query {
   user(id: String!): User!
-  getCurrentUser: User!
+  getCurrentUser: User
   product(id: String!): Product!
 }
 
 type Mutation {
   createUser(input: UserCreateInput!): User!
   updateUser(input: UserUpdateInput!): User!
+  updateUserMetadata(input: UserMetaDataInput!): User!
   createProduct(input: ProductCreateInput!): Product!
   updateProduct(input: ProductUpdateInput!): Product!
 }
 
 input UserCreateInput {
+  _id: String!
   name: String!
-  authId: String!
   email: String!
 }
 
 input UserUpdateInput {
+  _id: String!
   name: String
-  authId: String!
   email: String
+}
+
+input UserMetaDataInput {
+  key: String!
+  value: String!
 }
 
 input ProductCreateInput {
@@ -88,5 +94,5 @@ input ProductCreateInput {
 input ProductUpdateInput {
   name: String
   price: Int
-  id: String!
+  _id: String!
 }

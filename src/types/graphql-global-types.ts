@@ -8,14 +8,19 @@
 //==============================================================
 
 export interface UserCreateInput {
+  _id: string;
   name: string;
-  authId: string;
   email: string;
 }
 
+export interface UserMetaDataInput {
+  key: string;
+  value: string;
+}
+
 export interface UserUpdateInput {
+  _id: string;
   name?: string | null;
-  authId: string;
   email?: string | null;
 }
 
