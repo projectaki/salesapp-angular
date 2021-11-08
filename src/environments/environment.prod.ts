@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
   auth: {
-    domain: 'dev--ihngka6.eu.auth0.com',
-    clientId: 'YExphUsxSZurW3NGyT1X5qvj5YRcFymi',
+    domain: 'sales-app-staging.eu.auth0.com',
+    clientId: 'YmgcJtOElp8kLMoDBD5HkJXxtlT4wJrL',
     audience: 'https://sales-api-dev.com',
     // httpInterceptor: { // for REST, when using the inerceptor
     //   allowedList: ['http://localhost:3000/*'],
