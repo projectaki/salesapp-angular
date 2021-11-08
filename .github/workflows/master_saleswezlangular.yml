@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: ./dist/salesapp-angular
+          path: dist/salesapp-angular
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,4 +51,4 @@ jobs:
         with:
           app-name: "saleswezlangular"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B89F63D90CE342E2A33E153ADE2D5DA3 }}
-          package: ./dist/salesapp-angular
+          package: .
