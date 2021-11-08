@@ -50,6 +50,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: "saleswezlangular"
-          slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B89F63D90CE342E2A33E153ADE2D5DA3 }}
-          package: .
+          package: "./dist/salesapp-angular"
