@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "apollo-download": "apollo client:download-schema --endpoint=http://localhost:3000/graphql schema.graphql",
