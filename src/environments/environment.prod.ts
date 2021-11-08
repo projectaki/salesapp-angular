@@ -3,7 +3,7 @@ export const environment = {
   auth: {
     domain: 'sales-app-staging.eu.auth0.com',
     clientId: 'YmgcJtOElp8kLMoDBD5HkJXxtlT4wJrL',
-    audience: 'https://sales-api-dev.com',
+    audience: 'https://nestjs.com',
     // httpInterceptor: { // for REST, when using the inerceptor
     //   allowedList: ['http://localhost:3000/*'],
     // },
