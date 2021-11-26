@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -30,6 +31,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatInputModule,
     MatSlideToggleModule,
     LayoutModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     BrowserModule,
@@ -46,6 +48,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatInputModule,
     MatSlideToggleModule,
     LayoutModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class SharedModule {}

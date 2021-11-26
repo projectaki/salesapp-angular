@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from '@auth0/auth0-angular';
 import { take, tap } from 'rxjs/operators';
-import { AuthenticationService } from 'src/app/core/auth/authentication.service';
 import { ThemeService } from 'src/app/core/theme/theme.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
   darkMode!: FormControl;
   constructor(
     private fb: FormBuilder,
-    public auth: AuthenticationService,
+    public auth: AuthService,
     private themeService: ThemeService
   ) {
     this.darkMode = this.fb.control('');

@@ -32,11 +32,7 @@
 </ng-container>
 
 <ng-template #loggedOut>
-  <button
-    mat-flat-button
-    color="accent"
-    (click)="auth.authApi.loginWithRedirect()"
-  >
+  <button mat-flat-button color="accent" (click)="auth.loginWithRedirect()">
     Login
   </button>
 </ng-template>

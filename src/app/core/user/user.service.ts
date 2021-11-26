@@ -25,6 +25,14 @@ const CREATE_USER = gql`
   }
 `;
 
+const CREATE_OR_UPDATE_USER = gql`
+  mutation createOrUpdateUser($input: UserUpdateInput!) {
+    createOrUpdateUser(input: $input) {
+      _id
+    }
+  }
+`;
+
 const UPDATE_USER = gql`
   mutation updateUser($input: UserUpdateInput!) {
     updateUser(input: $input) {
@@ -61,6 +69,15 @@ export class UserService {
     return this.apollo.watchQuery<any>({
       query: GET_CURRENT_USER,
     }).valueChanges;
+  }
+
+  createOrUpdateUser(input: UserUpdateInput) {
+    return this.apollo.mutate({
+      mutation: CREATE_OR_UPDATE_USER,
+      variables: {
+        input,
+      },
+    });
   }
 
   createUser(input: UserCreateInput) {

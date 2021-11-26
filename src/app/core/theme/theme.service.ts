@@ -1,8 +1,8 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { skip, take, tap } from 'rxjs/operators';
-import { AuthenticationService } from '../auth/authentication.service';
 import { UserService } from '../user/user.service';
 
 @Injectable({
@@ -29,7 +29,7 @@ export class ThemeService {
   constructor(
     private overlay: OverlayContainer,
     private userService: UserService,
-    private auth: AuthenticationService
+    private auth: AuthService
   ) {
     this.themeChange$.subscribe();
     this.setInitialTheme();
@@ -40,7 +40,7 @@ export class ThemeService {
     if (isDarkMode) {
       this.themeChange.next(JSON.parse(isDarkMode));
     }
-    this.auth.authApi.user$
+    this.auth.user$
       .pipe(
         take(1),
         tap((x) => {

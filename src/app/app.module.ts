@@ -11,6 +11,7 @@ import { CallbackModule } from './modules/callback/callback.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './modules/layout/layout.module';
 import { ProfileModule } from './modules/profile/profile.module';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { ProfileModule } from './modules/profile/profile.module';
     BrowserAnimationsModule,
     LayoutModule,
     ProfileModule,
+    SharedModule,
   ],
   providers: [
     //{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, // Needed for REST, attaching token to requests

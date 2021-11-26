@@ -62,6 +62,7 @@ type Query {
 }
 
 type Mutation {
+  createOrUpdateUser(input: UserUpdateInput!): User!
   createUser(input: UserCreateInput!): User!
   updateUser(input: UserUpdateInput!): User!
   updateUserMetadata(input: UserMetaDataInput!): User!
@@ -69,16 +70,16 @@ type Mutation {
   updateProduct(input: ProductUpdateInput!): Product!
 }
 
-input UserCreateInput {
-  _id: String!
-  name: String!
-  email: String!
-}
-
 input UserUpdateInput {
   _id: String!
   name: String
   email: String
+}
+
+input UserCreateInput {
+  _id: String!
+  name: String!
+  email: String!
 }
 
 input UserMetaDataInput {
