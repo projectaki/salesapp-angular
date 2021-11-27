@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { User } from '@auth0/auth0-spa-js';
 import { combineLatest, of, Subject } from 'rxjs';
-import { switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { mergeMap, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { ThemeService } from 'src/app/core/theme/theme.service';
 import { UserService } from 'src/app/core/user/user.service';
 
@@ -13,15 +13,11 @@ import { UserService } from 'src/app/core/user/user.service';
 @Component({
   template: '<div></div>',
 })
-export class LoginCallbackComponent implements OnInit {
-  private unsub$ = new Subject<any>();
-  constructor(
-    private router: Router,
-    private userService: UserService,
-    private auth: AuthService
-  ) {}
+export class LoginCallbackComponent {
+  constructor(private userService: UserService, private auth: AuthService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    console.log('callback');
     this._handleLogin();
   }
 
@@ -29,15 +25,7 @@ export class LoginCallbackComponent implements OnInit {
    * Login handler callback, redirect to main page when all actions complete
    */
   private _handleLogin = () => {
-    combineLatest([
-      this.auth.user$.pipe(
-        take(1),
-        switchMap(this._initUserCallback),
-        takeUntil(this.unsub$)
-      ),
-    ])
-      .pipe(tap(() => this.router.navigate([''])))
-      .subscribe();
+    this.auth.user$.pipe(take(1), mergeMap(this._initUserCallback)).subscribe();
   };
 
   /**
