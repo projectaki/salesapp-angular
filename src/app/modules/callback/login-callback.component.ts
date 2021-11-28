@@ -17,7 +17,6 @@ export class LoginCallbackComponent {
   constructor(private userService: UserService, private auth: AuthService) {}
 
   ngOnInit() {
-    console.log('callback');
     this._handleLogin();
   }
 

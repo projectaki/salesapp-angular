@@ -4,7 +4,14 @@ import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  template: ` <router-outlet></router-outlet> `,
+  template: `<div [hidden]="auth.isLoading$ | async">
+      <router-outlet></router-outlet>
+    </div>
+
+    <mat-spinner
+      *ngIf="auth.isLoading$ | async"
+      style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%)"
+    ></mat-spinner> `,
 })
 export class AppComponent {
   public loading = true;
