@@ -13,6 +13,9 @@ const GET_CURRENT_USER = gql`
     getCurrentUser {
       name
       email
+      user_metadata {
+        darkMode
+      }
     }
   }
 `;
@@ -41,34 +44,24 @@ const UPDATE_USER = gql`
   }
 `;
 
-const UPDATE_USER_METADATA = gql`
-  mutation updateUserMetadata($input: UserMetaDataInput!) {
-    updateUserMetadata(input: $input) {
-      _id
-    }
-  }
-`;
-
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  user!: Observable<any>;
+  user$ = this.apollo
+    .watchQuery<any>({
+      query: GET_CURRENT_USER,
+    })
+    .valueChanges.pipe(map((res) => res.data.getCurrentUser));
 
   constructor(private apollo: Apollo) {}
 
-  ngOnInit() {
-    this.user = this.apollo
+  getUser() {
+    return this.apollo
       .watchQuery<any>({
         query: GET_CURRENT_USER,
       })
       .valueChanges.pipe(map((res) => res.data.getCurrentUser));
-  }
-
-  getUser() {
-    return this.apollo.watchQuery<any>({
-      query: GET_CURRENT_USER,
-    }).valueChanges;
   }
 
   createOrUpdateUser(input: UserUpdateInput) {
@@ -92,13 +85,6 @@ export class UserService {
   updateUser(input: UserUpdateInput) {
     return this.apollo.mutate({
       mutation: UPDATE_USER,
-      variables: { input },
-    });
-  }
-
-  updateUserMetadata(input: UserMetaDataInput) {
-    return this.apollo.mutate({
-      mutation: UPDATE_USER_METADATA,
       variables: { input },
     });
   }

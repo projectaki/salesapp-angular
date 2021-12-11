@@ -32,10 +32,15 @@ directive @connection(
   filter: [String!]
 ) on FIELD
 
+type UserMetadata {
+  darkMode: Boolean!
+}
+
 type User {
   _id: String!
   name: String!
   email: String!
+  user_metadata: UserMetadata!
   created_at: DateTime!
   updated_at: DateTime!
 }
@@ -55,6 +60,10 @@ type Product {
   img_url: String
 }
 
+input UserMetadataInput {
+  darkMode: Boolean!
+}
+
 type Query {
   user(id: String!): User!
   getCurrentUser: User
@@ -65,7 +74,6 @@ type Mutation {
   createOrUpdateUser(input: UserUpdateInput!): User!
   createUser(input: UserCreateInput!): User!
   updateUser(input: UserUpdateInput!): User!
-  updateUserMetadata(input: UserMetaDataInput!): User!
   createProduct(input: ProductCreateInput!): Product!
   updateProduct(input: ProductUpdateInput!): Product!
 }
@@ -74,17 +82,13 @@ input UserUpdateInput {
   _id: String!
   name: String
   email: String
+  user_metadata: UserMetadataInput
 }
 
 input UserCreateInput {
   _id: String!
   name: String!
   email: String!
-}
-
-input UserMetaDataInput {
-  key: String!
-  value: String!
 }
 
 input ProductCreateInput {

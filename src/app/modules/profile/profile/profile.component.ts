@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
-import { take, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { take, takeUntil, tap } from 'rxjs/operators';
 import { ThemeService } from 'src/app/core/theme/theme.service';
 
 @Component({
@@ -10,35 +11,38 @@ import { ThemeService } from 'src/app/core/theme/theme.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  private unsub$ = new Subject();
   darkMode!: FormControl;
   constructor(
     private fb: FormBuilder,
     public auth: AuthService,
-    private themeService: ThemeService
+    private theme: ThemeService
   ) {
-    this.darkMode = this.fb.control('');
+    this.darkMode = this.fb.control(false);
   }
 
   ngOnInit(): void {
-    this._initDarkModeListener();
-  }
-  private _initDarkModeListener() {
-    const sliderVal = localStorage.getItem('darkMode');
-    if (sliderVal) {
-      this.darkMode.setValue(JSON.parse(sliderVal));
-    }
-    // set initial value for slider
-    this.themeService.themeChange$
+    this.darkMode.valueChanges
       .pipe(
-        take(1),
         tap((x) => {
-          this.darkMode.setValue(x);
-        })
+          this.theme.darkModeTrigger(x);
+        }),
+        takeUntil(this.unsub$)
       )
       .subscribe();
-    // when slider changes, set the theme to change in service
-    this.darkMode.valueChanges
-      .pipe(tap((x) => this.themeService.toggleTheme(x)))
+
+    this.theme.darkMode$
+      .pipe(
+        tap((x) => {
+          this.darkMode.setValue(x, { emitEvent: false });
+        }),
+        takeUntil(this.unsub$)
+      )
       .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.unsub$.next();
+    this.unsub$.complete();
   }
 }
