@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
     this.darkMode.valueChanges
       .pipe(
         tap((x) => {
-          this.theme.darkModeTrigger(x);
+          this.theme.toggleDarkmode(x);
         }),
         takeUntil(this.unsub$)
       )

@@ -13,15 +13,15 @@ export interface UserCreateInput {
   email: string;
 }
 
-export interface UserMetaDataInput {
-  key: string;
-  value: string;
+export interface UserMetadataInput {
+  darkMode: boolean;
 }
 
 export interface UserUpdateInput {
   _id: string;
   name?: string | null;
   email?: string | null;
+  user_metadata?: UserMetadataInput | null;
 }
 
 //==============================================================

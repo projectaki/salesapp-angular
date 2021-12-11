@@ -11,11 +11,21 @@ import { UserService } from '../user/user.service';
 export class ThemeService {
   private readonly darkMode: ReplaySubject<boolean> =
     new ReplaySubject<boolean>();
-  darkMode$: Observable<boolean> = this.darkMode.asObservable();
+  darkMode$: Observable<boolean> = this.darkMode.asObservable().pipe(
+    tap((val) => {
+      if (val) {
+        document.body.classList.add('darkMode');
+        this.overlay.getContainerElement().classList.add('darkMode');
+      } else {
+        document.body.classList.remove('darkMode');
+        this.overlay.getContainerElement().classList.remove('darkMode');
+      }
+    })
+  );
 
-  constructor() {}
+  constructor(private overlay: OverlayContainer) {}
 
-  darkModeTrigger(val: boolean) {
+  toggleDarkmode(val: boolean) {
     this.darkMode.next(val);
   }
 }

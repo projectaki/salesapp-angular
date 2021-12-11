@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 import { Apollo, gql } from 'apollo-angular';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { filter, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import {
   UserCreateInput,
-  UserMetaDataInput,
   UserUpdateInput,
 } from 'src/types/graphql-global-types';
+import { getUser, getUser_getCurrentUser } from 'types/getUser';
 
 const GET_CURRENT_USER = gql`
   query getUser {
     getCurrentUser {
+      _id
       name
       email
       user_metadata {
@@ -48,20 +50,29 @@ const UPDATE_USER = gql`
   providedIn: 'root',
 })
 export class UserService {
-  user$ = this.apollo
-    .watchQuery<any>({
+  user$ = this.auth.user$.pipe(
+    switchMap((u) => {
+      if (u === null || u === undefined) {
+        return of(null);
+      }
+      return this.currentUser$;
+    }),
+    shareReplay(1)
+  );
+  currentUser$ = this.apollo
+    .watchQuery<getUser>({
       query: GET_CURRENT_USER,
     })
     .valueChanges.pipe(map((res) => res.data.getCurrentUser));
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo, private auth: AuthService) {}
 
   getUser() {
     return this.apollo
-      .watchQuery<any>({
+      .watchQuery<getUser_getCurrentUser>({
         query: GET_CURRENT_USER,
       })
-      .valueChanges.pipe(map((res) => res.data.getCurrentUser));
+      .valueChanges.pipe(map((res) => res.data));
   }
 
   createOrUpdateUser(input: UserUpdateInput) {
