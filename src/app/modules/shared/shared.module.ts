@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
@@ -13,12 +12,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ImageModule } from 'primeng/image';
+import { CardModule } from 'primeng/card';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
@@ -32,10 +32,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSlideToggleModule,
     LayoutModule,
     MatProgressSpinnerModule,
+    ImageModule,
+    FontAwesomeModule,
   ],
   exports: [
-    BrowserModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
@@ -49,6 +49,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSlideToggleModule,
     LayoutModule,
     MatProgressSpinnerModule,
+    ImageModule,
+    FontAwesomeModule,
   ],
 })
 export class SharedModule {}

@@ -20,6 +20,11 @@ const routes: Routes = [
     children: [
       { component: ProfileComponent, path: 'profile' },
       {
+        path: 'stores',
+        loadChildren: () =>
+          import('./modules/stores/stores.module').then((m) => m.StoresModule),
+      },
+      {
         path: '',
         redirectTo: '/home',
         pathMatch: 'full',

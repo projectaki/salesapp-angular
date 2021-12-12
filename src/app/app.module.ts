@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './modules/layout/layout.module';
 import { ProfileModule } from './modules/profile/profile.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { SharedModule } from './modules/shared/shared.module';
     LayoutModule,
     ProfileModule,
     SharedModule,
+    FontAwesomeModule,
   ],
   providers: [
     //{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }, // Needed for REST, attaching token to requests
