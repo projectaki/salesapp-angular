@@ -1,0 +1,10 @@
+<mat-card class="card">
+  <mat-card-actions align="end">
+    <notification-bell
+      [subscribed]="subscribed"
+      (subscribeClick)="onSubscribe($event)"
+    ></notification-bell>
+  </mat-card-actions>
+
+  <img mat-card-image src="{{ store.logoUrl }}" alt="Logo" />
+</mat-card>

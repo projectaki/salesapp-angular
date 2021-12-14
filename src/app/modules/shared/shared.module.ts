@@ -15,9 +15,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ImageModule } from 'primeng/image';
 import { CardModule } from 'primeng/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NotificationBellComponent } from './notification-bell/notification-bell.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [NotificationBellComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -36,6 +37,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FontAwesomeModule,
   ],
   exports: [
+    NotificationBellComponent,
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,

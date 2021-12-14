@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faBell, faBellSlash } from '@fortawesome/free-regular-svg-icons';
-import { faBell as solidBell } from '@fortawesome/free-solid-svg-icons';
+import { Store } from './store';
 
 @Component({
   selector: 'app-stores',
@@ -8,19 +7,17 @@ import { faBell as solidBell } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./stores.component.scss'],
 })
 export class StoresComponent implements OnInit {
-  faBell = faBell;
-  faBellSlash = faBellSlash;
+  public stores!: Store[];
+  public subscribed = true;
 
-  selectedIcon = faBell;
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  onMouseEnter() {
-    this.selectedIcon = solidBell;
-  }
-
-  onMouseLeave() {
-    this.selectedIcon = faBell;
+  ngOnInit(): void {
+    this.stores = [
+      {
+        id: '1',
+        name: 'Elgiganten',
+        logoUrl:
+          'https://www.elgiganten.dk/assets_spa/svg/logo_b2c_header_dk.svg',
+      },
+    ];
   }
 }
