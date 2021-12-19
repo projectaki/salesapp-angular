@@ -13,7 +13,7 @@ export class StoresComponent implements OnInit {
   ngOnInit(): void {
     this.stores = [
       {
-        id: '1',
+        _id: '1',
         name: 'Elgiganten',
         logoUrl:
           'https://www.elgiganten.dk/assets_spa/svg/logo_b2c_header_dk.svg',
