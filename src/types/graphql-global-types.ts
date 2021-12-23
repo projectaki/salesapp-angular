@@ -7,6 +7,10 @@
 // START Enums and Input Objects
 //==============================================================
 
+export interface StoreSubscriptionInput {
+  _id?: string | null;
+}
+
 export interface UserCreateInput {
   _id: string;
   name: string;
@@ -18,10 +22,11 @@ export interface UserMetadataInput {
 }
 
 export interface UserUpdateInput {
-  _id: string;
+  _id?: string | null;
   name?: string | null;
   email?: string | null;
   user_metadata?: UserMetadataInput | null;
+  subscriptions?: StoreSubscriptionInput[] | null;
 }
 
 //==============================================================

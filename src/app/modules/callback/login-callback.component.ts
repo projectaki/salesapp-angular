@@ -34,7 +34,7 @@ export class LoginCallbackComponent {
    */
   private _initUserCallback = (user: User | null | undefined) => {
     if (user) {
-      return this.userService.createOrUpdateUser({
+      return this.userService.saveUser({
         _id: user.sub!,
         name: user.name,
         email: user.email,

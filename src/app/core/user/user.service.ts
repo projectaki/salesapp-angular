@@ -7,16 +7,21 @@ import {
   UserCreateInput,
   UserUpdateInput,
 } from 'src/types/graphql-global-types';
-import { getUser, getUser_getCurrentUser } from 'types/getUser';
+import { authUser } from 'types/authUser';
 
-const GET_CURRENT_USER = gql`
-  query getUser {
-    getCurrentUser {
+const GET_AUTHENTICATED_USER = gql`
+  query authUser {
+    authUser {
       _id
       name
       email
       user_metadata {
         darkMode
+      }
+      subscriptions {
+        _id
+        name
+        logoUrl
       }
     }
   }
@@ -30,17 +35,9 @@ const CREATE_USER = gql`
   }
 `;
 
-const CREATE_OR_UPDATE_USER = gql`
-  mutation createOrUpdateUser($input: UserUpdateInput!) {
-    createOrUpdateUser(input: $input) {
-      _id
-    }
-  }
-`;
-
-const UPDATE_USER = gql`
-  mutation updateUser($input: UserUpdateInput!) {
-    updateUser(input: $input) {
+const SAVE_USER = gql`
+  mutation saveUser($input: UserUpdateInput!) {
+    saveUser(input: $input) {
       _id
     }
   }
@@ -60,24 +57,16 @@ export class UserService {
     shareReplay(1)
   );
   currentUser$ = this.apollo
-    .watchQuery<getUser>({
-      query: GET_CURRENT_USER,
+    .watchQuery<authUser>({
+      query: GET_AUTHENTICATED_USER,
     })
-    .valueChanges.pipe(map((res) => res.data.getCurrentUser));
+    .valueChanges.pipe(map((res) => res.data.authUser));
 
   constructor(private apollo: Apollo, private auth: AuthService) {}
 
-  getUser() {
-    return this.apollo
-      .watchQuery<getUser_getCurrentUser>({
-        query: GET_CURRENT_USER,
-      })
-      .valueChanges.pipe(map((res) => res.data));
-  }
-
-  createOrUpdateUser(input: UserUpdateInput) {
+  saveUser(input: UserUpdateInput) {
     return this.apollo.mutate({
-      mutation: CREATE_OR_UPDATE_USER,
+      mutation: SAVE_USER,
       variables: {
         input,
       },
@@ -90,13 +79,6 @@ export class UserService {
       variables: {
         input,
       },
-    });
-  }
-
-  updateUser(input: UserUpdateInput) {
-    return this.apollo.mutate({
-      mutation: UPDATE_USER,
-      variables: { input },
     });
   }
 }

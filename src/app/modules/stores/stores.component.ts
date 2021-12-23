@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from './store';
+import { StoreService } from './store.service';
 
 @Component({
   selector: 'app-stores',
@@ -7,17 +8,9 @@ import { Store } from './store';
   styleUrls: ['./stores.component.scss'],
 })
 export class StoresComponent implements OnInit {
-  public stores!: Store[];
+  constructor(private storeService: StoreService) {}
+  public stores$ = this.storeService.stores$;
   public subscribed = true;
 
-  ngOnInit(): void {
-    this.stores = [
-      {
-        _id: '1',
-        name: 'Elgiganten',
-        logoUrl:
-          'https://www.elgiganten.dk/assets_spa/svg/logo_b2c_header_dk.svg',
-      },
-    ];
-  }
+  ngOnInit(): void {}
 }

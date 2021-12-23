@@ -36,10 +36,23 @@ type UserMetadata {
   darkMode: Boolean!
 }
 
+type Store {
+  _id: String!
+  name: String!
+  logoUrl: String!
+}
+
+type StoreSubscription {
+  _id: String!
+  name: String
+  logoUrl: String
+}
+
 type User {
   _id: String!
   name: String!
   email: String!
+  subscriptions: [StoreSubscription!]!
   user_metadata: UserMetadata!
   created_at: DateTime!
   updated_at: DateTime!
@@ -66,29 +79,34 @@ input UserMetadataInput {
 
 type Query {
   user(id: String!): User!
-  getCurrentUser: User
+  authUser: User
+  stores: [Store!]!
   product(id: String!): Product!
 }
 
 type Mutation {
-  createOrUpdateUser(input: UserUpdateInput!): User!
   createUser(input: UserCreateInput!): User!
-  updateUser(input: UserUpdateInput!): User!
+  saveUser(input: UserUpdateInput!): User!
   createProduct(input: ProductCreateInput!): Product!
   updateProduct(input: ProductUpdateInput!): Product!
-}
-
-input UserUpdateInput {
-  _id: String!
-  name: String
-  email: String
-  user_metadata: UserMetadataInput
 }
 
 input UserCreateInput {
   _id: String!
   name: String!
   email: String!
+}
+
+input UserUpdateInput {
+  _id: String
+  name: String
+  email: String
+  user_metadata: UserMetadataInput
+  subscriptions: [StoreSubscriptionInput!]
+}
+
+input StoreSubscriptionInput {
+  _id: String
 }
 
 input ProductCreateInput {

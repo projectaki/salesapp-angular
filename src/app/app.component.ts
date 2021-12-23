@@ -39,6 +39,9 @@ export class AppComponent {
     this.unsub$.complete();
   }
 
+  /**
+   * Listen to darkmode toggle, trigger change in themeservice and persist to db
+   */
   initDarkmodeHandler() {
     this.userService.user$
       .pipe(
@@ -47,7 +50,7 @@ export class AppComponent {
             this.theme.toggleDarkmode(u.user_metadata.darkMode);
             return this.theme.darkMode$.pipe(
               switchMap((val) => {
-                return this.userService.updateUser({
+                return this.userService.saveUser({
                   _id: u._id,
                   user_metadata: {
                     darkMode: val,

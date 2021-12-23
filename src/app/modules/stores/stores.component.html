@@ -4,6 +4,7 @@
   fxLayout.xs="column"
   fxLayoutGap="32px"
   fxLayoutAlign="flex-start"
+  *ngIf="stores$ | async as stores"
 >
   <div
     fxFlex="0 1 calc(33.3% - 32px)"
