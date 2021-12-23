@@ -4,14 +4,16 @@
   fxLayout.xs="column"
   fxLayoutGap="32px"
   fxLayoutAlign="flex-start"
-  *ngIf="stores$ | async as stores"
 >
   <div
     fxFlex="0 1 calc(33.3% - 32px)"
     fxFlex.lt-md="0 1 calc(50% - 32px)"
     fxFlex.lt-sm=" 0 1 100%"
-    *ngFor="let store of stores"
+    *ngFor="let storeSub of storeSubs"
   >
-    <store-card [store]="store" [subscribed]="subscribed"></store-card>
+    <store-card
+      [storeSub]="storeSub"
+      (subscribe)="onSubscribe($event)"
+    ></store-card>
   </div>
 </div>

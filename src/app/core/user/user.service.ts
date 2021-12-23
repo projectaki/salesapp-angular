@@ -60,7 +60,10 @@ export class UserService {
     .watchQuery<authUser>({
       query: GET_AUTHENTICATED_USER,
     })
-    .valueChanges.pipe(map((res) => res.data.authUser));
+    .valueChanges.pipe(
+      map((res) => res.data.authUser),
+      shareReplay(1)
+    );
 
   constructor(private apollo: Apollo, private auth: AuthService) {}
 

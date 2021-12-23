@@ -1,20 +1,21 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Store } from '../store';
+import { StoreSubscription } from '../store-subscription';
+
+export interface StoreSubEvent {
+  _id: string;
+  isSub: boolean;
+}
 
 @Component({
   selector: 'store-card',
   templateUrl: './store-card.component.html',
   styleUrls: ['./store-card.component.scss'],
 })
-export class StoreCardComponent implements OnInit {
-  @Input() store!: Store;
-  @Input() subscribed!: boolean;
-
-  constructor() {}
-
-  ngOnInit(): void {}
+export class StoreCardComponent {
+  @Input() storeSub!: StoreSubscription;
+  @Output() subscribe: EventEmitter<StoreSubEvent> = new EventEmitter();
 
   onSubscribe(val: boolean) {
-    console.log((val && 'sub') || 'unsub');
+    this.subscribe.emit({ _id: this.storeSub._id, isSub: val });
   }
 }
