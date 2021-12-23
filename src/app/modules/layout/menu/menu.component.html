@@ -8,6 +8,10 @@
       <mat-icon color="accent">more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="./stores">
+        <mat-icon color="accent">shopping_bag</mat-icon>
+        <span>Stores</span>
+      </button>
       <button mat-menu-item routerLink="./profile">
         <mat-icon color="accent">person</mat-icon>
         <span>Profile</span>
@@ -24,6 +28,9 @@
     </mat-menu>
   </ng-container>
   <div *ngIf="!isSmall" fxLayout="row" fxLayoutGap="2em">
+    <button mat-button color="accent" routerLink="./stores">
+      <span>Stores</span>
+    </button>
     <button mat-button color="accent" routerLink="./profile">
       <span>Profile</span>
     </button>
