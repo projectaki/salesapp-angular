@@ -1,19 +1,23 @@
-<div
-  class="container"
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutGap="32px"
-  fxLayoutAlign="flex-start"
->
+<div *ngIf="store.subIds$ | async as subIds">
   <div
-    fxFlex="0 1 calc(33.3% - 32px)"
-    fxFlex.lt-md="0 1 calc(50% - 32px)"
-    fxFlex.lt-sm=" 0 1 100%"
-    *ngFor="let storeSub of storeSubs"
+    class="container"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutGap="32px"
+    fxLayoutAlign="flex-start"
+    *ngIf="stores$ | async as stores"
   >
-    <store-card
-      [storeSub]="storeSub"
-      (subscribe)="onSubscribe($event)"
-    ></store-card>
+    <div
+      fxFlex="0 1 calc(33.3% - 32px)"
+      fxFlex.lt-md="0 1 calc(50% - 32px)"
+      fxFlex.lt-sm=" 0 1 100%"
+      *ngFor="let store of stores"
+    >
+      <store-card
+        [store]="store"
+        [isSub]="subIds.includes(store._id)"
+        (subscribe)="onSubscribe($event)"
+      ></store-card>
+    </div>
   </div>
 </div>

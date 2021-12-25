@@ -1,10 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { StoreSubscription } from '../store-subscription';
-
-export interface StoreSubEvent {
-  _id: string;
-  isSub: boolean;
-}
+import { Store } from '../models/store';
+import { StoreSubEvent } from '../models/store-sub-event';
 
 @Component({
   selector: 'store-card',
@@ -12,10 +8,12 @@ export interface StoreSubEvent {
   styleUrls: ['./store-card.component.scss'],
 })
 export class StoreCardComponent {
-  @Input() storeSub!: StoreSubscription;
+  @Input() store!: Store;
+  @Input() isSub!: boolean;
+
   @Output() subscribe: EventEmitter<StoreSubEvent> = new EventEmitter();
 
   onSubscribe(val: boolean) {
-    this.subscribe.emit({ _id: this.storeSub._id, isSub: val });
+    this.subscribe.emit({ _id: this.store._id, val });
   }
 }

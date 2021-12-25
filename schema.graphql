@@ -87,6 +87,8 @@ type Query {
 type Mutation {
   createUser(input: UserCreateInput!): User!
   saveUser(input: UserUpdateInput!): User!
+  addSubscription(_id: String!): User!
+  removeSubscription(_id: String!): User!
   createProduct(input: ProductCreateInput!): Product!
   updateProduct(input: ProductUpdateInput!): Product!
 }

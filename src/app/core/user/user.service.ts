@@ -7,7 +7,9 @@ import {
   UserCreateInput,
   UserUpdateInput,
 } from 'src/types/graphql-global-types';
+import { addSub } from 'types/addSub';
 import { authUser } from 'types/authUser';
+import { removeSub } from 'types/removeSub';
 
 const GET_AUTHENTICATED_USER = gql`
   query authUser {
@@ -22,6 +24,16 @@ const GET_AUTHENTICATED_USER = gql`
         _id
         name
         logoUrl
+      }
+    }
+  }
+`;
+
+const GET_SUBS = gql`
+  query authUser {
+    authUser {
+      subscriptions {
+        _id
       }
     }
   }
@@ -43,6 +55,28 @@ const SAVE_USER = gql`
   }
 `;
 
+const ADD_SUB = gql`
+  mutation addSub($input: String!) {
+    addSubscription(_id: $input) {
+      subscriptions {
+        _id
+        name
+      }
+    }
+  }
+`;
+
+const REMOVE_SUB = gql`
+  mutation removeSub($input: String!) {
+    removeSubscription(_id: $input) {
+      subscriptions {
+        _id
+        name
+      }
+    }
+  }
+`;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -56,14 +90,23 @@ export class UserService {
     }),
     shareReplay(1)
   );
+
   currentUser$ = this.apollo
     .watchQuery<authUser>({
       query: GET_AUTHENTICATED_USER,
     })
-    .valueChanges.pipe(
-      map((res) => res.data.authUser),
-      shareReplay(1)
-    );
+    .valueChanges.pipe(map((res) => res.data.authUser));
+
+  /**
+   * no-cache because we want a new backend call every time we call it,
+   * this should be replaced by a global user state
+   */
+  subs$ = this.apollo
+    .query<authUser>({
+      query: GET_SUBS,
+      fetchPolicy: 'no-cache',
+    })
+    .pipe(map((x) => x.data.authUser));
 
   constructor(private apollo: Apollo, private auth: AuthService) {}
 
@@ -83,5 +126,31 @@ export class UserService {
         input,
       },
     });
+  }
+
+  addSub(input: string): Observable<string[]> {
+    return this.apollo
+      .mutate<addSub>({
+        mutation: ADD_SUB,
+        variables: {
+          input,
+        },
+      })
+      .pipe(
+        map((x) => x.data?.addSubscription.subscriptions.map((x) => x._id)!)
+      );
+  }
+
+  removeSub(input: string): Observable<string[]> {
+    return this.apollo
+      .mutate<removeSub>({
+        mutation: REMOVE_SUB,
+        variables: {
+          input,
+        },
+      })
+      .pipe(
+        map((x) => x.data?.removeSubscription.subscriptions.map((x) => x._id)!)
+      );
   }
 }
