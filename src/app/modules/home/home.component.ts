@@ -8,13 +8,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  config: any;
-
-  constructor(public auth: AuthService) {
-    this.config = environment;
-  }
+  constructor() {}
 
   ngOnInit(): void {}
-
-  async test() {}
 }

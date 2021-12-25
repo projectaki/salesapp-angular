@@ -11,6 +11,7 @@ export interface addSub_addSubscription_subscriptions {
   __typename: "StoreSubscription";
   _id: string;
   name: string | null;
+  logoUrl: string | null;
 }
 
 export interface addSub_addSubscription {

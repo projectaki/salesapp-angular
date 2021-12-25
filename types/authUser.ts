@@ -26,6 +26,8 @@ export interface authUser_authUser {
   email: string;
   user_metadata: authUser_authUser_user_metadata;
   subscriptions: authUser_authUser_subscriptions[];
+  created_at: any;
+  updated_at: any;
 }
 
 export interface authUser {

@@ -10,6 +10,7 @@ import {
 import { addSub } from 'types/addSub';
 import { authUser } from 'types/authUser';
 import { removeSub } from 'types/removeSub';
+import { saveUser } from 'types/saveUser';
 
 const GET_AUTHENTICATED_USER = gql`
   query authUser {
@@ -25,24 +26,8 @@ const GET_AUTHENTICATED_USER = gql`
         name
         logoUrl
       }
-    }
-  }
-`;
-
-const GET_SUBS = gql`
-  query authUser {
-    authUser {
-      subscriptions {
-        _id
-      }
-    }
-  }
-`;
-
-const CREATE_USER = gql`
-  mutation createUser($input: UserCreateInput!) {
-    createUser(input: $input) {
-      _id
+      created_at
+      updated_at
     }
   }
 `;
@@ -51,6 +36,18 @@ const SAVE_USER = gql`
   mutation saveUser($input: UserUpdateInput!) {
     saveUser(input: $input) {
       _id
+      name
+      email
+      created_at
+      updated_at
+      user_metadata {
+        darkMode
+      }
+      subscriptions {
+        _id
+        name
+        logoUrl
+      }
     }
   }
 `;
@@ -61,6 +58,7 @@ const ADD_SUB = gql`
       subscriptions {
         _id
         name
+        logoUrl
       }
     }
   }
@@ -72,6 +70,7 @@ const REMOVE_SUB = gql`
       subscriptions {
         _id
         name
+        logoUrl
       }
     }
   }
@@ -81,54 +80,26 @@ const REMOVE_SUB = gql`
   providedIn: 'root',
 })
 export class UserService {
-  user$ = this.auth.user$.pipe(
-    switchMap((u) => {
-      if (u === null || u === undefined) {
-        return of(null);
-      }
-      return this.currentUser$;
-    }),
-    shareReplay(1)
-  );
-
   currentUser$ = this.apollo
-    .watchQuery<authUser>({
+    .query<authUser>({
       query: GET_AUTHENTICATED_USER,
     })
-    .valueChanges.pipe(map((res) => res.data.authUser));
+    .pipe(map((res) => res.data.authUser));
 
-  /**
-   * no-cache because we want a new backend call every time we call it,
-   * this should be replaced by a global user state
-   */
-  subs$ = this.apollo
-    .query<authUser>({
-      query: GET_SUBS,
-      fetchPolicy: 'no-cache',
-    })
-    .pipe(map((x) => x.data.authUser));
-
-  constructor(private apollo: Apollo, private auth: AuthService) {}
+  constructor(private apollo: Apollo) {}
 
   saveUser(input: UserUpdateInput) {
-    return this.apollo.mutate({
-      mutation: SAVE_USER,
-      variables: {
-        input,
-      },
-    });
+    return this.apollo
+      .mutate<saveUser>({
+        mutation: SAVE_USER,
+        variables: {
+          input,
+        },
+      })
+      .pipe(map((x) => x.data?.saveUser));
   }
 
-  createUser(input: UserCreateInput) {
-    return this.apollo.mutate({
-      mutation: CREATE_USER,
-      variables: {
-        input,
-      },
-    });
-  }
-
-  addSub(input: string): Observable<string[]> {
+  addSub(input: string) {
     return this.apollo
       .mutate<addSub>({
         mutation: ADD_SUB,
@@ -136,12 +107,10 @@ export class UserService {
           input,
         },
       })
-      .pipe(
-        map((x) => x.data?.addSubscription.subscriptions.map((x) => x._id)!)
-      );
+      .pipe(map((x) => x.data?.addSubscription.subscriptions));
   }
 
-  removeSub(input: string): Observable<string[]> {
+  removeSub(input: string) {
     return this.apollo
       .mutate<removeSub>({
         mutation: REMOVE_SUB,
@@ -149,8 +118,6 @@ export class UserService {
           input,
         },
       })
-      .pipe(
-        map((x) => x.data?.removeSubscription.subscriptions.map((x) => x._id)!)
-      );
+      .pipe(map((x) => x.data?.removeSubscription.subscriptions));
   }
 }

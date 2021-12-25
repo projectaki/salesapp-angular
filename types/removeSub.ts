@@ -11,6 +11,7 @@ export interface removeSub_removeSubscription_subscriptions {
   __typename: "StoreSubscription";
   _id: string;
   name: string | null;
+  logoUrl: string | null;
 }
 
 export interface removeSub_removeSubscription {

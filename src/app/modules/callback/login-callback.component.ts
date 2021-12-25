@@ -4,7 +4,6 @@ import { AuthService } from '@auth0/auth0-angular';
 import { User } from '@auth0/auth0-spa-js';
 import { combineLatest, of, Subject } from 'rxjs';
 import { mergeMap, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-import { ThemeService } from 'src/app/core/theme/theme.service';
 import { UserService } from 'src/app/core/user/user.service';
 
 /**
@@ -24,7 +23,9 @@ export class LoginCallbackComponent {
    * Login handler callback, redirect to main page when all actions complete
    */
   private _handleLogin = () => {
-    this.auth.user$.pipe(take(1), mergeMap(this._initUserCallback)).subscribe();
+    this.auth.user$
+      .pipe(take(1), switchMap(this._initUserCallback))
+      .subscribe();
   };
 
   /**
